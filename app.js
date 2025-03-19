@@ -6,10 +6,10 @@ const path = require("path");
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-// Define a route
-app.get("/", (req, res) => {
-  res.render("home");
-});
+// Import the route properly
+const baseRoutes = require("./routes/main/base"); // Ensure this path is correct
+
+app.use("/", baseRoutes); // Mount the router at a specific path ("/")
 
 // Start the server
 const PORT = 3000;
