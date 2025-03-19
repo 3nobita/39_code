@@ -3,3 +3,4 @@ package.json/
 package-lock.json/
 .vercel
 
+VERCEL_LIVE = https://39-code.vercel.app/
