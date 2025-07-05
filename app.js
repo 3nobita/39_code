@@ -1,3 +1,5 @@
+//app.js
+
 const express = require("express");
 const app = express();
 const path = require("path");
@@ -5,6 +7,8 @@ const path = require("path");
 // Set the view engine to EJS
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
+app.use('/SnapFolio', express.static(path.join(__dirname, 'SnapFolio')));
+
 
 // Import the route properly
 const baseRoutes = require("./routes/main/base"); // Ensure this path is correct
