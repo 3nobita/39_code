@@ -16,7 +16,7 @@ const baseRoutes = require("./routes/main/base"); // Ensure this path is correct
 app.use("/", baseRoutes); // Mount the router at a specific path ("/")
 
 // Start the server
-const PORT = 3000;
+const PORT = 1000;
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
