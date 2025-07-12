@@ -1,6 +1,6 @@
 Thanks for downloading this template!
 
 Template Name: SnapFolio
-Template URL: https://bootstrapmade.com/snapfolio-bootstrap-portfolio-template/
-Author: BootstrapMade.com
-License: https://bootstrapmade.com/license/
+Template URL: https://Bhavesh .com/snapfolio-bootstrap-portfolio-template/
+Author: Bhavesh .com
+License: https://Bhavesh .com/license/
