@@ -1,645 +1,625 @@
 <!DOCTYPE html>
-<html>
-
-<head>
-    <title>Welcome</title>
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
-        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>39code.ai</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
-
-        body {
-            line-height: 1.5;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 400;
-            overflow-x: hidden;
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap");
+      :root {
+        --hki-bg: #000;
+        --hki-surface: #111;
+        --hki-border: rgba(255, 255, 255, 0.1);
+        --hki-text-primary: #f0f0f0;
+        --hki-text-secondary: #a0a0a0;
+        --hki-accent-1: #4f46e5;
+        --hki-accent-2: #a855f7;
+      }
+      body {
+        background-color: var(--hki-bg);
+        color: var(--hki-text-primary);
+        font-family: "Inter", sans-serif;
+        margin: 0;
+        line-height: 1.6;
+      }
+      #hki_page_wrapper {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1rem;
+      }
+      #hki_header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.5rem 0;
+        position: relative;
+        z-index: 10;
+      }
+      .hki_logo {
+        font-size: 1.5rem;
+        font-weight: 700;
+      }
+      .hki_nav a {
+        color: var(--hki-text-secondary);
+        text-decoration: none;
+        margin-left: 2rem;
+        transition: color 0.3s;
+      }
+      .hki_nav a:hover {
+        color: var(--hki-text-primary);
+      }
+      .hki_nav_button {
+        background: var(--hki-surface);
+        border: 1px solid var(--hki-border);
+        color: var(--hki-text-primary);
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        transition: 0.3s;
+      }
+      .hki_nav_button:hover {
+        background: var(--hki-text-primary);
+        color: var(--hki-bg);
+      }
+      #hki_mobile_nav_toggle {
+        display: none;
+        background: none;
+        border: none;
+        color: var(--hki-text-primary);
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+      #hki_hero {
+        position: relative;
+        height: 90vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+      #hki_neural_canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+      }
+      .hki_hero_content {
+        position: relative;
+        z-index: 2;
+        padding: 1rem;
+      }
+      #hki_hero_title {
+        font-size: clamp(2.5rem, 10vw, 6rem);
+        font-weight: 900;
+        margin: 0 0 0.5rem 0;
+        letter-spacing: -0.05em;
+        line-height: 1;
+        min-height: 1.2em;
+      }
+      .hki_hero_subtitle {
+        font-size: clamp(1rem, 3vw, 1.25rem);
+        color: var(--hki-text-secondary);
+        max-width: 50ch;
+        margin: 0 auto;
+      }
+      .hki_section {
+        padding: 6rem 0;
+      }
+      .hki_bento_grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+      }
+      .hki_feature_card {
+        background: var(--hki-surface);
+        border: 1px solid var(--hki-border);
+        padding: 2rem;
+        border-radius: 12px;
+      }
+      .hki_feature_card h3 {
+        margin: 0 0 0.5rem 0;
+        font-size: 1.25rem;
+      }
+      .hki_feature_card p {
+        margin: 0;
+        color: var(--hki-text-secondary);
+      }
+      .hki_large_card {
+        grid-column: 1/-1;
+      }
+      .hki_animate_on_scroll {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.6s, transform 0.6s;
+      }
+      .hki_animate_on_scroll.hki_is_visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .hki_section_title {
+        text-align: center;
+        font-size: 2rem;
+        margin-bottom: 2rem;
+      }
+      .hki_demo_terminal {
+        background: var(--hki-surface);
+        border: 1px solid var(--hki-border);
+        border-radius: 12px;
+        padding: 1.5rem;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      #hki_demo_output {
+        min-height: 100px;
+        margin-bottom: 1rem;
+        color: var(--hki-text-secondary);
+      }
+      #hki_demo_output .hki_ai_response::after {
+        content: "_";
+        animation: hki_blink 0.7s infinite;
+      }
+      @keyframes hki_blink {
+        50% {
+          opacity: 0;
         }
-
-        * {
-            margin: 0;
-            box-sizing: border-box;
+      }
+      #hki_demo_form {
+        display: flex;
+        gap: 1rem;
+      }
+      #hki_demo_input {
+        flex-grow: 1;
+        background: #000;
+        border: 1px solid var(--hki-border);
+        border-radius: 6px;
+        padding: 0.75rem;
+        font-family: inherit;
+        font-size: 1rem;
+        color: var(--hki-text-primary);
+      }
+      #hki_demo_form button {
+        background-image: linear-gradient(
+          to right,
+          var(--hki-accent-1),
+          var(--hki-accent-2)
+        );
+        border: none;
+        color: var(--hki-text-primary);
+        width: 50px;
+        height: 50px;
+        border-radius: 6px;
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+      #hki_cta {
+        text-align: center;
+      }
+      #hki_cta h2 {
+        font-size: 2.5rem;
+        margin: 0 0 0.5rem 0;
+      }
+      #hki_cta p {
+        color: var(--hki-text-secondary);
+        margin-bottom: 2rem;
+      }
+      .hki_cta_button {
+        background-image: linear-gradient(
+          to right,
+          var(--hki-accent-1),
+          var(--hki-accent-2)
+        );
+        color: var(--hki-text-primary);
+        padding: 1rem 2rem;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: 500;
+        transition: 0.3s;
+      }
+      .hki_cta_button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 10px 20px -5px rgba(168, 85, 247, 0.4);
+      }
+      #hki_footer {
+        text-align: center;
+        padding: 2rem 0;
+        border-top: 1px solid var(--hki-border);
+      }
+      .hki_credit_line {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        color: var(--hki-text-secondary);
+      }
+      .hki_credit_line span {
+        font-weight: 500;
+      }
+      .hki_footer_links {
+        display: flex;
+        gap: 0.5rem;
+      }
+      .hki_footer_links a {
+        color: var(--hki-text-secondary);
+        display: inline-flex;
+        transition: color 0.2s, transform 0.2s;
+      }
+      .hki_footer_links a:hover {
+        color: var(--hki-accent-1);
+        transform: scale(1.1);
+      }
+      @media (max-width: 768px) {
+        .hki_nav {
+          display: none;
+          position: absolute;
+          top: 100%;
+          right: 0;
+          background: var(--hki-surface);
+          width: 100%;
+          flex-direction: column;
+          align-items: flex-start;
+          padding: 1rem;
         }
-
-        :before,
-        :after {
-            box-sizing: border-box;
+        .hki_nav.hki_mobile_open {
+          display: flex;
         }
-
-        .container {
-            max-width: 1200px;
-            margin: auto;
+        .hki_nav a {
+          margin: 0;
+          padding: 1rem;
+          width: calc(100% - 2rem);
         }
-
-        .row {
-            display: flex;
-            flex-wrap: wrap;
+        #hki_mobile_nav_toggle {
+          display: block;
         }
-
-        .v-center {
-            align-items: center;
+        .hki_bento_grid {
+          grid-template-columns: 1fr;
         }
-
-        ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
+        .hki_large_card {
+          grid-column: auto;
         }
-
-        a {
-            text-decoration: none;
-        }
-
-        /* header */
-        .header {
-            display: block;
-            width: 100%;
-            position: relative;
-            z-index: 999;
-            padding: 15px;
-            background-color: #1b1a1a;
-        }
-
-        .header .item-left {
-            flex: 0 0 17%;
-        }
-
-        .header .logo a {
-            font-size: 30px;
-            color: #f8f5f5;
-            font-weight: 700;
-            text-decoration: none;
-        }
-
-        .header .item-center {
-            flex: 0 0 66%;
-        }
-
-        .header .item-right {
-            flex: 0 0 17%;
-            display: flex;
-            justify-content: flex-end;
-        }
-
-        .header .item-right a {
-            text-decoration: none;
-            font-size: 16px;
-            color: #555555;
-            display: inline-block;
-            margin-left: 10px;
-            transition: color 0.3s ease;
-        }
-
-        .header .menu>ul>li {
-            display: inline-block;
-            line-height: 50px;
-            margin-left: 25px;
-        }
-
-        .header .menu>ul>li>a {
-            font-size: 15px;
-            font-weight: 500;
-            color: #000000;
-            position: relative;
-            text-transform: capitalize;
-            transition: color 0.3s ease;
-        }
-
-        .header .menu>ul>li .sub-menu {
-            position: absolute;
-            z-index: 500;
-            background-color: #ffffff;
-            box-shadow: -2px 2px 70px -25px rgba(0, 0, 0, 0.3);
-            padding: 20px 30px;
-            transition: all 0.5s ease;
-            margin-top: 25px;
-            opacity: 0;
-            visibility: hidden;
-        }
-
-        @media(min-width: 992px) {
-            .header .menu>ul>li.menu-item-has-children:hover .sub-menu {
-                margin-top: 0;
-                visibility: visible;
-                opacity: 1;
-            }
-        }
-
-        .header .menu>ul>li .sub-menu>ul>li {
-            line-height: 1;
-        }
-
-        .header .menu>ul>li .sub-menu>ul>li>a {
-            display: inline-block;
-            padding: 10px 0;
-            font-size: 15px;
-            color: #555555;
-            transition: color 0.3s ease;
-            text-decoration: none;
-            text-transform: capitalize;
-        }
-
-        .header .menu>ul>li .single-column-menu {
-            min-width: 280px;
-            max-width: 350px;
-        }
-
-        .header .menu>ul>li .sub-menu.mega-menu>.list-item>ul>li {
-            line-height: 1;
-            display: block;
-        }
-
-        .header .menu>ul>li .sub-menu.mega-menu>.list-item>ul>li>a {
-            padding: 10px 0;
-            display: inline-block;
-            font-size: 15px;
-            color: #555555;
-            transition: color 0.3s ease;
-        }
-
-        .header .menu>ul>li .sub-menu.mega-menu {
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .header .menu>ul>li .sub-menu.mega-menu-column-4 {
-            max-width: 1100px;
-            width: 100%;
-            display: flex;
-            flex-wrap: wrap;
-            padding: 20px 15px;
-        }
-
-        .header .menu>ul>li .sub-menu.mega-menu-column-4>.list-item {
-            flex: 0 0 25%;
-            padding: 0 15px;
-        }
-
-        .header .menu>ul>li .sub-menu.mega-menu-column-4>.list-item .title {
-            font-size: 16px;
-            color: #ea4636;
-            font-weight: 500;
-            line-height: 1;
-            padding: 10px 0;
-        }
-
-        .header .menu>ul>li .sub-menu.mega-menu-column-4>.list-item.text-center .title {
-            text-align: center;
-        }
-
-        .header .menu>ul>li .sub-menu.mega-menu-column-4>.list-item img {
-            max-width: 100%;
-            width: 100%;
-            vertical-align: middle;
-            margin-top: 10px;
-            height: 300px;
-            object-fit: cover;
-        }
-
-        .header .menu>ul>li .sub-menu.mega-menu>.list-item>ul>li>a:hover,
-        .header .menu>ul>li .sub-menu>ul>li>a:hover,
-        .header .item-right a:hover,
-        .header .menu>ul>li:hover>a {
-            color: #ea4636;
-        }
-
-        /* banner section */
-        .banner-section {
-            background-image: url('../img/banner.jpg');
-            background-size: cover;
-            background-position: center;
-            height: 700px;
-            width: 100%;
-            display: block;
-        }
-
-        .mobile-menu-head,
-        .mobile-menu-trigger {
-            display: none;
-        }
-
-        /*responsive*/
-        @media(max-width: 991px) {
-
-            .header .item-center {
-                order: 3;
-                flex: 0 0 100%;
-            }
-
-            .header .item-left,
-            .header .item-right {
-                flex: 0 0 auto;
-            }
-
-            .v-center {
-                justify-content: space-between;
-            }
-
-            .header .mobile-menu-trigger {
-                display: flex;
-                height: 30px;
-                width: 30px;
-                margin-left: 15px;
-                cursor: pointer;
-                align-items: center;
-                justify-content: center;
-            }
-
-            .header .mobile-menu-trigger span {
-                display: block;
-                height: 2px;
-                background-color: #ffffff;
-                width: 24px;
-                position: relative;
-            }
-
-            .header .mobile-menu-trigger span:before,
-            .header .mobile-menu-trigger span:after {
-                content: '';
-                position: absolute;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background-color: #ffffff;
-            }
-
-            .header .mobile-menu-trigger span:before {
-                top: -6px;
-            }
-
-            .header .mobile-menu-trigger span:after {
-                top: 6px;
-            }
-
-            .header .item-right {
-                align-items: center;
-            }
-
-            .header .menu {
-                position: fixed;
-                width: 320px;
-                background-color: #080808;
-                left: 0;
-                top: 0;
-                height: 100%;
-                overflow: hidden;
-                transform: translate(-100%);
-                transition: all 0.5s ease;
-                z-index: 1099;
-            }
-
-            .header .menu.active {
-                transform: translate(0%);
-            }
-
-            .header .menu>ul>li {
-                line-height: 1;
-                margin: 0;
-                display: block;
-            }
-
-            .header .menu>ul>li>a {
-                line-height: 50px;
-                height: 50px;
-                padding: 0 50px 0 15px;
-                display: block;
-                border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-            }
-
-            .header .menu>ul>li>a i {
-                position: absolute;
-                height: 50px;
-                width: 50px;
-                top: 0;
-                right: 0;
-                text-align: center;
-                line-height: 50px;
-                transform: rotate(-90deg);
-            }
-
-            .header .menu .mobile-menu-head {
-                display: flex;
-                height: 50px;
-                border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-                justify-content: space-between;
-                align-items: center;
-                position: relative;
-                z-index: 501;
-                position: sticky;
-                background-color: #0a0a0a;
-                top: 0;
-            }
-
-            .header .menu .mobile-menu-head .go-back {
-                height: 50px;
-                width: 50px;
-                border-right: 1px solid rgba(0, 0, 0, 0.1);
-                cursor: pointer;
-                line-height: 50px;
-                text-align: center;
-                color: #ffffff;
-                font-size: 16px;
-                display: none;
-            }
-
-            .header .menu .mobile-menu-head.active .go-back {
-                display: block;
-            }
-
-            .header .menu .mobile-menu-head .current-menu-title {
-                font-size: 15px;
-                font-weight: 500;
-                color: #000000;
-            }
-
-            .header .menu .mobile-menu-head .mobile-menu-close {
-                height: 50px;
-                width: 50px;
-                border-left: 1px solid rgba(0, 0, 0, 0.1);
-                cursor: pointer;
-                line-height: 50px;
-                text-align: center;
-                color: #ffffff;
-                font-size: 25px;
-            }
-
-            .header .menu .menu-main {
-                height: 100%;
-                overflow-x: hidden;
-                overflow-y: auto;
-            }
-
-            .header .menu>ul>li .sub-menu.mega-menu,
-            .header .menu>ul>li .sub-menu {
-                visibility: visible;
-                opacity: 1;
-                position: absolute;
-                box-shadow: none;
-                margin: 0;
-                padding: 15px;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                padding-top: 65px;
-                max-width: none;
-                min-width: auto;
-                display: none;
-                transform: translateX(0%);
-                overflow-y: auto;
-            }
-
-            .header .menu>ul>li .sub-menu.active {
-                display: block;
-            }
-
-            @keyframes slideLeft {
-                0% {
-                    opacity: 0;
-                    transform: translateX(100%);
-                }
-
-                100% {
-                    opacity: 1;
-                    transform: translateX(0%);
-                }
-            }
-
-            @keyframes slideRight {
-                0% {
-                    opacity: 1;
-                    transform: translateX(0%);
-                }
-
-                100% {
-                    opacity: 0;
-                    transform: translateX(100%);
-                }
-            }
-
-            .header .menu>ul>li .sub-menu.mega-menu-column-4>.list-item img {
-                margin-top: 0;
-            }
-
-            .header .menu>ul>li .sub-menu.mega-menu-column-4>.list-item.text-center .title {
-                margin-bottom: 20px;
-            }
-
-            .header .menu>ul>li .sub-menu.mega-menu-column-4>.list-item.text-center:last-child .title {
-                margin-bottom: 0px;
-            }
-
-            .header .menu>ul>li .sub-menu.mega-menu-column-4>.list-item {
-                flex: 0 0 100%;
-                padding: 0px;
-            }
-
-            .header .menu>ul>li .sub-menu>ul>li>a,
-            .header .menu>ul>li .sub-menu.mega-menu>.list-item>ul>li>a {
-                display: block;
-            }
-
-            .header .menu>ul>li .sub-menu.mega-menu>.list-item>ul {
-                margin-bottom: 15px;
-            }
-
-            .menu-overlay {
-                position: fixed;
-                background-color: rgba(0, 0, 0, 0.5);
-                left: 0;
-                top: 0;
-                width: 100%;
-                height: 100%;
-                z-index: 1098;
-                visibility: hidden;
-                opacity: 0;
-                transition: all 0.5s ease;
-            }
-
-            .menu-overlay.active {
-                visibility: visible;
-                opacity: 1;
-            }
-        }
+      }
     </style>
+  </head>
+  <body>
+    <div id="hki_page_wrapper">
+      <header id="hki_header">
+        <div class="hki_logo">39code.ai</div>
+        <nav class="hki_nav">
+          <a href="#">Platform</a>
+          <a href="#">Solutions</a>
+          <a href="#">API</a>
+          <a href="/SnapFolio/index.html" target="_blank" class="hki_nav_button">Watch Out</a>
+        </nav>
+        <button id="hki_mobile_nav_toggle">☰</button>
+      </header>
 
-</head>
+      <main id="hki_main_content">
+        <section id="hki_hero">
+          <canvas id="hki_neural_canvas"></canvas>
+          <div class="hki_hero_content">
+            <h1 id="hki_hero_title"></h1>
+            <p class="hki_hero_subtitle">
+              We don't just build tools. We build intelligence. Orchestrate
+              complex tasks with autonomous agents that learn, adapt, and
+              execute.
+            </p>
+          </div>
+        </section>
+              <section id="hki_demo" class="hki_section">
+          <h2 class="hki_section_title hki_animate_on_scroll">
+            Interact with the Core <br>
+            we are working on this part
+          </h2>
+          <div class="hki_demo_terminal hki_animate_on_scroll">
+            <div id="hki_demo_output"></div>
+            <form id="hki_demo_form">
+              <input
+                type="text"
+                id="hki_demo_input"
+                placeholder="Ask a question, e.g., 'What is agentic AI?'"
+                autocomplete="off"
+              />
+              <button type="submit">→</button>
+            </form>
+          </div>
+        </section>
 
-<body>
-    <!-- header start -->
-    <header class="header">
-        <div class="container">
-            <div class="row v-center">
-                <div class="header-item item-left">
-                    <div class="logo">
-                        <a href="#">39Codes</a>
-                    </div>
-                </div>
-                <!-- menu start here -->
-                <div class="header-item item-center">
-                    <div class="menu-overlay"></div>
-                    <nav class="menu">
-                        <div class="mobile-menu-head">
-                            <div class="go-back"><i class="fa fa-angle-left"></i></div>
-                            <div class="current-menu-title"></div>
-                            <div class="mobile-menu-close">&times;</div>
-                        </div>
-                        <ul class="menu-main">
-                            <li>
-                                <a href="/SnapFolio/index.html" target="_blank" style="color: #ffffff; ">Portfolio</a>
-                            </li>
-                     
-                            <li class="menu-item-has-children">
-                                <a href="#" style="color: #ffffff;">Links<i class="fa fa-angle-down"></i></a>
-                                <div class="sub-menu mega-menu mega-menu-column-4">
-                                    <div class="list-item">
-                                        <h4 class="title" style="color: #000000;">Topics</h4>
-                                        <ul>
-                                            <li><a
-                                                    href="https://marked-dew-344.notion.site/20da0c573e098050920ac52561feef24?v=20da0c573e09814a82ff000cef84d098">Node
-                                                    and Js</a></li>
-                                            <li><a href="#">.</a></li>
-                                            <li><a href="#">.</a></li>
-                                            <li><a href="#">...</a></li>
-                                            <li><a href="#">.</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="list-item">
-                                        <h4 class="title" style="color: #000000;">Roadmap</h4>
-                                        <ul>
-                                            <li><a href="https://miro.com/app/board/uXjVImv7iAY=/" target="_blank">Node and js</a></li>
-                                            <li><a href="#">.</a></li>
-                                            <li><a href="#">.</a></li>
-                                            <li><a href="#">.</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="list-item">
-                                        <h4 class="title">four</h4>
-                                        <ul>
-                                            <li><a href="#">.</a></li>
-                                            <li><a href="#">.</a></li>
-                                            <li><a href="#">.</a></li>
-                                            <li><a href="#">. .</a></li>
-                                            <li><a href="#">.</a></li>
-                                            <li><a href="#">.</a></li>
-                                            <li><a href="#">.</a></li>
-                                            <li><a href="#">.</a></li>
-                                            <li><a href="#">.</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="list-item">
-                                        <img src="https://c4.wallpaperflare.com/wallpaper/632/34/549/technology-monitor-alpha-coders-binary-wallpaper-preview.jpg"
-                                            alt="Chair" />
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="menu-item-has-children">
-                                <a href="#" style="color: #ffffff;">Blog <i class="fas fa-angle-down"></i></a>
-                                <div class="sub-menu single-column-menu">
-                                    <ul>
-                                        <li><a href="#">Standard Layout</a></li>
-                                        <li><a href="#">Grid Layout</a></li>
-                                        <li><a href="#">single Post Layout</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="menu-item-has-children">
-                                <a href="#" style="color: #ffffff;">Pages <i class="fas fa-angle-down"></i></a>
-                                <div class="sub-menu single-column-menu">
-                                    <ul>
-                                        <li><a href="#">Login</a></li>
-                                        <li><a href="#">Register</a></li>
-                                        <li><a href="#">Faq</a></li>
-                                        <li><a href="#">404 Page</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li>
-                                <a href="#" style="color: #ffffff;">Contact</a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-                <!-- menu end here -->
-                <div class="header-item item-right">
-                    <a href="#" style="color: #ffffff;"><i class="fas fa-search"></i></a>
-                    <a href="#" style="color: #ffffff;"><i class="far fa-heart"></i></a>
-                    <a href="#" style="color: #ffffff;"><i class="fas fa-shopping-cart"></i></a>
-                    <!-- mobile menu trigger -->
-                    <div class="mobile-menu-trigger">
-                        <span></span>
-                    </div>
-                </div>
+        <section id="hki_features" class="hki_section">
+          <div class="hki_bento_grid">
+            <div class="hki_feature_card hki_animate_on_scroll">
+              <h3>Cognitive Core</h3>
+              <p>
+                Our foundational model understands context, reasons through
+                complex problems, and generates novel solutions.
+              </p>
             </div>
+            <div class="hki_feature_card hki_animate_on_scroll">
+              <h3>Dynamic Workflow</h3>
+              <p>
+                Deploy autonomous agents that create and execute their own task
+                lists to achieve your objectives.
+              </p>
+            </div>
+            <div class="hki_feature_card hki_animate_on_scroll hki_large_card">
+              <h3>Seamless Integration</h3>
+              <p>
+                Integrate our AI's reasoning capabilities directly into your
+                existing applications and workflows with a simple, powerful API.
+              </p>
+            </div>
+          </div>
+        </section>
+
+  
+<!-- 
+        <section id="hki_cta" class="hki_section">
+          <div class="hki_cta_content hki_animate_on_scroll">
+            <h2>Unleash True Autonomy.</h2>
+            <p>
+              Move beyond automation. Start building with intelligence today.
+            </p>
+            <a href="#" class="hki_cta_button">Get Started</a>
+          </div>
+        </section> -->
+      </main>
+
+      <footer id="hki_footer">
+        <div class="hki_credit_line">
+          <span>Crafted by Bhavesh Shinde</span>
+          <div class="hki_footer_links">
+            <a
+              href="#"
+              target="_blank"
+              title="LinkedIn"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
+                ></path>
+                <rect x="2" y="9" width="4" height="12"></rect>
+                <circle cx="4" cy="4" r="2"></circle>
+              </svg>
+            </a>
+            <a
+              href="#"
+              target="_blank"
+              title="Instagram"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path
+                  d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"
+                ></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+            </a>
+          </div>
         </div>
-    </header>
-    <!-- header end -->
-     <!-- <%- include('projects') %> -->
+      </footer>
+    </div>
     <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        function hki_initMobileNav() {
+          const hki_toggle = document.getElementById("hki_mobile_nav_toggle");
+          const hki_nav = document.querySelector(".hki_nav");
+          hki_toggle.addEventListener("click", () =>
+            hki_nav.classList.toggle("hki_mobile_open")
+          );
+        }
 
+        function hki_initHeroTitle() {
+          const hki_title = document.getElementById("hki_hero_title");
+          const hki_text = "Synthesize Reality";
+          const hki_chars = "ABCDEFGHIJKLM_NOPQRSTUVWXYZ-0123456789/\\";
+          let hki_interval;
+          let hki_iteration = 0;
 
-        const menu = document.querySelector(".menu");
-        const menuMain = menu.querySelector(".menu-main");
-        const goBack = menu.querySelector(".go-back");
-        const menuTrigger = document.querySelector(".mobile-menu-trigger");
-        const closeMenu = menu.querySelector(".mobile-menu-close");
-        let subMenu;
-        menuMain.addEventListener("click", (e) => {
-            if (!menu.classList.contains("active")) {
-                return;
+          clearInterval(hki_interval);
+          hki_interval = setInterval(() => {
+            hki_title.innerText = hki_text
+              .split("")
+              .map((letter, index) => {
+                if (index < hki_iteration) return hki_text[index];
+                return hki_chars[Math.floor(Math.random() * hki_chars.length)];
+              })
+              .join("");
+            if (hki_iteration >= hki_text.length) clearInterval(hki_interval);
+            hki_iteration += 1 / 3;
+          }, 40);
+        }
+
+        function hki_initNeuralCanvas() {
+          const hki_canvas = document.getElementById("hki_neural_canvas");
+          if (!hki_canvas) return;
+          const hki_ctx = hki_canvas.getContext("2d");
+          let hki_particles = [],
+            hki_mouse = { x: null, y: null };
+          const hki_particleCount = Math.floor(window.innerWidth / 30);
+
+          const hki_resizeCanvas = () => {
+            hki_canvas.width = hki_canvas.offsetWidth;
+            hki_canvas.height = hki_canvas.offsetHeight;
+          };
+          hki_resizeCanvas();
+          window.addEventListener("resize", hki_resizeCanvas);
+
+          document.addEventListener("mousemove", (e) => {
+            hki_mouse.x = e.x;
+            hki_mouse.y = e.y;
+          });
+
+          class HkiParticle {
+            constructor(x, y, dirX, dirY, size, color) {
+              this.x = x;
+              this.y = y;
+              this.dirX = dirX;
+              this.dirY = dirY;
+              this.size = size;
+              this.color = color;
             }
-            if (e.target.closest(".menu-item-has-children")) {
-                const hasChildren = e.target.closest(".menu-item-has-children");
-                showSubMenu(hasChildren);
+            draw() {
+              hki_ctx.beginPath();
+              hki_ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+              hki_ctx.fillStyle = this.color;
+              hki_ctx.fill();
             }
-        });
-        goBack.addEventListener("click", () => {
-            hideSubMenu();
-        })
-        menuTrigger.addEventListener("click", () => {
-            toggleMenu();
-        })
-        closeMenu.addEventListener("click", () => {
-            toggleMenu();
-        })
-        document.querySelector(".menu-overlay").addEventListener("click", () => {
-            toggleMenu();
-        })
-        function toggleMenu() {
-            menu.classList.toggle("active");
-            document.querySelector(".menu-overlay").classList.toggle("active");
-        }
-        function showSubMenu(hasChildren) {
-            subMenu = hasChildren.querySelector(".sub-menu");
-            subMenu.classList.add("active");
-            subMenu.style.animation = "slideLeft 0.5s ease forwards";
-            const menuTitle = hasChildren.querySelector("i").parentNode.childNodes[0].textContent;
-            menu.querySelector(".current-menu-title").innerHTML = menuTitle;
-            menu.querySelector(".mobile-menu-head").classList.add("active");
-        }
+            update() {
+              if (this.x > hki_canvas.width || this.x < 0)
+                this.dirX = -this.dirX;
+              if (this.y > hki_canvas.height || this.y < 0)
+                this.dirY = -this.dirY;
 
-        function hideSubMenu() {
-            subMenu.style.animation = "slideRight 0.5s ease forwards";
-            setTimeout(() => {
-                subMenu.classList.remove("active");
-            }, 300);
-            menu.querySelector(".current-menu-title").innerHTML = "";
-            menu.querySelector(".mobile-menu-head").classList.remove("active");
-        }
+              let dx = hki_mouse.x - this.x;
+              let dy = hki_mouse.y - this.y;
+              let dist = Math.sqrt(dx * dx + dy * dy);
+              if (dist < 100) {
+                this.x += this.dirX + dx * 0.05;
+                this.y += this.dirY + dy * 0.05;
+              } else {
+                this.x += this.dirX;
+                this.y += this.dirY;
+              }
+              this.draw();
+            }
+          }
 
-        window.onresize = function () {
-            if (this.innerWidth > 991) {
-                if (menu.classList.contains("active")) {
-                    toggleMenu();
+          const hki_initParticles = () => {
+            hki_particles = [];
+            for (let i = 0; i < hki_particleCount; i++) {
+              let size = Math.random() * 2 + 1;
+              let x = Math.random() * (innerWidth - size * 2);
+              let y = Math.random() * (innerHeight - size * 2);
+              let dirX = Math.random() * 0.4 - 0.2;
+              let dirY = Math.random() * 0.4 - 0.2;
+              hki_particles.push(
+                new HkiParticle(
+                  x,
+                  y,
+                  dirX,
+                  dirY,
+                  size,
+                  "rgba(79, 70, 229, 0.8)"
+                )
+              );
+            }
+          };
+
+          const hki_connectParticles = () => {
+            for (let a = 0; a < hki_particles.length; a++) {
+              for (let b = a; b < hki_particles.length; b++) {
+                let dist = Math.sqrt(
+                  Math.pow(hki_particles[a].x - hki_particles[b].x, 2) +
+                    Math.pow(hki_particles[a].y - hki_particles[b].y, 2)
+                );
+                if (dist < 120) {
+                  hki_ctx.strokeStyle = `rgba(168, 85, 247, ${1 - dist / 120})`;
+                  hki_ctx.lineWidth = 0.5;
+                  hki_ctx.beginPath();
+                  hki_ctx.moveTo(hki_particles[a].x, hki_particles[a].y);
+                  hki_ctx.lineTo(hki_particles[b].x, hki_particles[b].y);
+                  hki_ctx.stroke();
                 }
-
+              }
             }
+          };
+
+          const hki_animate = () => {
+            requestAnimationFrame(hki_animate);
+            hki_ctx.clearRect(0, 0, innerWidth, innerHeight);
+            hki_particles.forEach((p) => p.update());
+            hki_connectParticles();
+          };
+
+          hki_initParticles();
+          hki_animate();
         }
 
+        function hki_initScrollAnimations() {
+          const hki_observer = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add("hki_is_visible");
+                  hki_observer.unobserve(entry.target);
+                }
+              });
+            },
+            { threshold: 0.1 }
+          );
+          document
+            .querySelectorAll(".hki_animate_on_scroll")
+            .forEach((el) => hki_observer.observe(el));
+        }
 
+        function hki_initDemoTerminal() {
+          const hki_form = document.getElementById("hki_demo_form");
+          const hki_input = document.getElementById("hki_demo_input");
+          const hki_output = document.getElementById("hki_demo_output");
+          let hki_isTyping = false;
+
+          const hki_responses = {
+            "what is agentic ai?":
+              "Agentic AI refers to autonomous systems that can perceive their environment, make decisions, and take actions to achieve specific goals without direct human intervention.",
+            "how does it work?":
+              "It operates on a loop of Observe, Orient, Decide, and Act (OODA). It assesses a situation, formulates a plan, and executes steps, learning from the outcomes.",
+            default:
+              "That's an interesting question. My core function is to break down complex objectives into executable tasks and orchestrate them to completion.",
+          };
+
+          const hki_typeResponse = (text) => {
+            hki_isTyping = true;
+            let i = 0;
+            const hki_responseEl = document.createElement("p");
+            hki_responseEl.className = "hki_ai_response";
+            hki_output.innerHTML = "";
+            hki_output.appendChild(hki_responseEl);
+            const hki_interval = setInterval(() => {
+              if (i < text.length) {
+                hki_responseEl.textContent += text.charAt(i);
+                i++;
+              } else {
+                clearInterval(hki_interval);
+                hki_isTyping = false;
+              }
+            }, 30);
+          };
+
+          hki_form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            if (hki_isTyping) return;
+            const hki_query = hki_input.value.toLowerCase().trim();
+            const hki_response =
+              hki_responses[hki_query] || hki_responses["default"];
+            hki_typeResponse(hki_response);
+            hki_input.value = "";
+          });
+        }
+
+        hki_initMobileNav();
+        hki_initHeroTitle();
+        hki_initNeuralCanvas();
+        hki_initScrollAnimations();
+        hki_initDemoTerminal();
+      });
     </script>
-</body>
-
+  </body>
 </html>
