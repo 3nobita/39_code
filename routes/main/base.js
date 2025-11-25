@@ -2,23 +2,22 @@
 
 const express = require('express')
 const app = express()
-const router = express.Router()
-
+const router = express.Router();
+const herAuth = require('../../public/components/her')
+   
 
 // Define a route
 router.get("/", (req, res) => {
     res.render("main/home");
 });
-router.get("/about", (req, res) => {
-    res.render('main/about')
+router.get('/her',(req,res)=>{
+    res.render('main/her')
 })
-router.get("/contact", (req, res) => {
-    res.render('main/contact')
+router.get('/platform',(req,res)=>{
+    res.render('main/platform')
 })
-router.get("/projects", (req, res) => {
-    res.render('main/projects')
-})
-
-
+ 
+ 
 module.exports = router
 
+  
